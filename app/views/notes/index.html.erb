@@ -2,26 +2,15 @@
 
 <h1>Notes</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @notes.each do |note| %>
-      <tr>
-        <td><%= note.content %></td>
-        <td><%= link_to 'Show', note %></td>
-        <td><%= link_to 'Edit', edit_note_path(note) %></td>
-        <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<ul id="notes">
+  <%= render @notes %>
+</ul>
 
 <br>
 
-<%= link_to 'New Note', new_note_path %>
+<h3>Add a new note:</h3>
+<%= form_for(@note, remote: true) do |f| %>
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+  <%= f.submit %>
+<% end %>
